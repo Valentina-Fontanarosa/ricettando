@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Profilo dello Chef</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="/css/responsive.css" rel="stylesheet" />
+    <style>
+        .chef-profile {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .chef-profile img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .recipe-list ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .recipe-list ul li {
+            margin-bottom: 10px;
+        }
+        /* Stile per il contenitore del form */
+        .form-container {
+            background-color: #f9f9f9; /* Colore di sfondo chiaro */
+            border-radius: 15px; /* Bordi arrotondati */
+            max-width: 500px; /* Larghezza massima */
+            margin: auto; /* Centrare il form */
+        }
+
+        /* Stile per i campi di input */
+        .form-control {
+            border-radius: 25px; /* Bordi arrotondati */
+        }
+
+        /* Stile per il pulsante di invio */
+        .btn-purple {
+            background-color: #ab7ee4;
+            border-color: #ab7ee4;
+            color: white;
+        }
+
+        .btn-purple:hover {
+            background-color: #8e63c9;
+            border-color: #8e63c9;
+            color: white;
+        }
+
+        /* Margine inferiore per il pulsante di caricamento file */
+        .form-control-file {
+            margin-bottom: 20px; /* Distanziare il pulsante di caricamento file */
+        }
+
+        .btn-lg .fas {
+            margin-right: .5rem;
+        }
+
+        /* Stile per le icone nei pulsanti della tabella */
+        .table .btn i {
+            margin: 0;
+        }
+
+        /* Rimozione margini e padding tra le colonne della tabella */
+        .table th, .table td {
+            vertical-align: middle;
+        }
+
+        /* Aggiustamenti per l'header della tabella */
+        .thead-dark th {
+            background-color: #343a40;
+            color: #fff;
+            border-color: #454d55;
+        }
+
+        .preview-img {
+            border: 1px solid #ddd; /* Bordo sottile */
+            padding: 10px; /* Spazio interno */
+            border-radius: 10px; /* Bordi arrotondati */
+            text-align: center; /* Centrare il contenuto */
+            max-width: 100%; /* Adattare la larghezza del contenitore */
+        }
+
+        .preview-img img {
+            max-width: 100%; /* Adattare l'immagine alla larghezza del contenitore */
+            height: auto; /* Mantenere le proporzioni dell'immagine */
+            border-radius: 10px; /* Bordi arrotondati per l'immagine */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+<header th:replace="fragments/layout.html :: navMenu"></header>
+
+<section class="generic_section layout_padding">
+    <div class="container">
+        <h2 class="text-center mt-4">Profilo User</h2>
+        <hr class="my-4 purple-line">
+        <div class="chef-profile">
+            <div class="row">
+                <div class="col-md-4">
+                    <img th:if="${user.img == 'profili'}" src="/images/profile/profile.webp" alt="Profilo dello Chef" class="rounded"/>
+                    <img th:unless="${user.img == 'profili'}" th:src="'/images/user/profili/' + ${user.img}" alt="Profilo dello Chef" class="rounded"/>
+                </div>
+                <div class="col-md-8">
+                    <h2 class="mb-4" th:text="${user.name + ' ' + user.surname}"></h2>
+                    <p>Data di nascita: <span th:text="${user.dateOfBirth}"></span></p>
+                    <p>Username: <span th:text="${credentials.username}"></span></p>
+                    <p>Ruolo: <span th:text="${credentials.ruolo}"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="generic_section layout_padding">
+
+    <div class="container mt-4">
+        <hr class="purple-line my-4">
+        <div class="container">
+            <div class="d-flex justify-content-center mt-5">
+                <div class="form-container rounded p-4 shadow">
+                    <div class="heading_container mb-4 text-center">
+                        <h3>Modifica Profilo</h3>
+                    </div>
+                    <form th:action="@{/modificaProfile/} + *{id}" method="post" th:object="${user}">
+                        <div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger" role="alert">
+                            <h4 align="center" th:each="err : ${#fields.globalErrors()}" th:text="'Errore: ' + ${err}">...</h4>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="name">Nome</label>
+                            <input type="text" id="name" class="form-control rounded-pill" placeholder="Nome" th:field="*{name}">
+                            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger mt-2" role="alert"></div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="surname">Cognome</label>
+                            <input type="text" id="surname" class="form-control rounded-pill" placeholder="Cognome" th:field="*{surname}">
+                            <div th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" class="alert alert-danger mt-2" role="alert"></div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="dateOfBirth">Data di nascita</label>
+                            <input type="text" id="dateOfBirth" class="form-control rounded-pill" placeholder="Data di nascita" th:field="*{dateOfBirth}">
+                            <div th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}" class="alert alert-danger mt-2" role="alert"></div>
+                        </div>
+                        <div class="btn_box text-center">
+                            <button type="submit" class="btn btn-purple">Modifica</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div> <!-- end container -->
+</section>
+<section class="generic_section layout_padding">
+
+    <div class="container mt-4">
+        <hr class="purple-line my-4">
+        <div class="container">
+            <div class="d-flex justify-content-center mt-5">
+                <div class="form-container rounded p-4 shadow">
+                    <div class="heading_container mb-4 text-center">
+                        <h3>Modifica Immagine User</h3>
+                    </div>
+                    <form th:action="@{/changeImgProfile/} + ${user.id}" method="post" enctype="multipart/form-data">
+                        <div class="form-group mb-4">
+                            <input type="file" class="form-control-file" name="file" required>
+                        </div>
+                        <div class="preview-img mb-4">
+                            <h5><em>Immagine attuale:</em></h5>
+                            <img th:if="${user.img == 'profili'}" src="/images/profile/profile.webp" alt="Profile chef">
+                            <img th:unless="${user.img == 'profili'}" th:src="'/images/user/profili/' + ${user.img}" alt="Profile Chef">
+                        </div>
+                        <div class="btn_box text-center">
+                            <button type="submit" class="btn btn-purple">Cambia Immagine</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div> <!-- end container -->
+</section>
+
+
+
+<section class="generic_section layout_padding">
+    <div class="container mt-4">
+        <hr class="purple-line my-4">
+        <div class="container">
+            <div class="d-flex justify-content-center mt-5">
+                <div class="form-container rounded p-4 shadow">
+                    <div class="heading_container mb-4 text-center">
+                        <h3>Cambia credenziali</h3>
+                    </div>
+                    <form th:action="@{/changeUserAndPass/} + ${credentials.id}" method="post" th:object="${credentials}" id="changeCredentialsForm">
+                        <div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger" role="alert">
+                            <h4 align="center" th:each="err : ${#fields.globalErrors()}" th:text="'Errore: ' + ${err}">...</h4>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="inputUsername">Username</label>
+                            <input type="text" class="form-control rounded-pill" id="inputUsername" aria-describedby="username" placeholder="Enter username" th:field="*{username}">
+                            <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-danger mt-2" role="alert"></div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="inputPassword">Nuova Password</label>
+                            <input type="password" class="form-control rounded-pill" id="inputPassword" placeholder="Password" th:field="*{password}" required>
+                            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger mt-2" role="alert"></div>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="inputConfirmPassword">Conferma Nuova Password</label>
+                            <input type="password" class="form-control rounded-pill" id="inputConfirmPassword" placeholder="Confirm Password" name="confirmPass" required>
+                        </div>
+                        <div class="btn_box text-center">
+                            <button type="button" class="btn btn-purple" data-bs-toggle="modal" data-bs-target="#confirmChangeModal">Modifica</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmChangeModal" tabindex="-1" role="dialog" aria-labelledby="confirmChangeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmChangeModalLabel">Conferma modifica</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Sei sicuro di voler modificare le credenziali?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                <button type="button" class="btn btn-purple" onclick="document.getElementById('changeCredentialsForm').submit()">Conferma</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="food-section mb-4"> </div>
+</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

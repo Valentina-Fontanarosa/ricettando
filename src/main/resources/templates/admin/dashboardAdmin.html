@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard - Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="/css/responsive.css" rel="stylesheet" />
+
+    <style>
+        .admin-box {
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            margin-bottom: 20px;
+        }
+
+        .contenuto-box {
+            text-align: center;
+        }
+
+        .contenuto-box h4 {
+            margin-top: 10px;
+            font-size: 1.5em;
+        }
+
+        .contenuto-box p {
+            margin-top: 5px;
+            font-size: 1em;
+            color: #555;
+        }
+
+        .admin-box h2 {
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            text-align: center;
+        }
+
+        .admin-box a.btn {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* Stile del bottone con il colore viola */
+        .btn-purple {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #ab7ee4;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+        }
+
+        /* Stile del bottone al passaggio del mouse */
+        .btn-purple:hover {
+            background-color: rgba(255, 255, 255, 0.8); /* Bianco opaco */
+            border-color: #8e63c9;
+            color: #be48eb; /* Colore viola chiaro */
+        }
+
+        /* Stile del bottone attivo e con il focus */
+        .btn-purple:active,
+        .btn-purple:focus {
+            background-color: rgba(255, 255, 255, 0.8); /* Bianco opaco */
+            border-color: #8e63c9;
+            color: #be48eb; /* Colore viola chiaro */
+        }
+
+        .admin-link {
+            text-decoration: none;
+            color: black;
+        }
+
+        .admin-link:hover,
+        .admin-link:focus {
+            text-decoration: none;
+            color: black;
+        }
+
+    </style>
+</head>
+<body>
+<header th:replace="fragments/layout.html :: navMenu"></header>
+
+<section class="generic_section layout_padding">
+    <div class="container mt-4">
+        <a href="#" th:href="@{/default}" class="admin-link">
+            <h2 class="text-center mb-4">Menu amministrazione</h2>
+        </a>
+        <hr class="purple-line my-4">
+
+        <div class="container-fluid mb-5">
+            <h3 class="mb-4">Inserimento:</h3>
+            <div class="container" >
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="admin-box">
+                            <div class="contenuto-box chef">
+                                <div class="icon">
+                                    <img style="width: 93px;" src="/images/loghi/chef.png">
+                                </div>
+                                <h4>Inserisci Chef</h4>
+                                <p>(Inserisci un nuovo <strong>Chef</strong> al sistema)</p>
+                                <a class="btn btn-purple" th:href="@{/admin/user/aggiungiUser}">Inserisci</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="admin-box">
+                            <div class="contenuto-box chef">
+                                <div class="icon">
+                                    <img style="width: 93px;" src="/images/loghi/recipe_icon.png">
+                                </div>
+                                <h4>Inserisci Ricetta</h4>
+                                <p>(Inserisci una nuova <strong>Ricetta</strong> al sistema)</p>
+                                <a class="btn btn-purple" th:href="@{/admin/user}">Inserisci</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="admin-box">
+                            <div class="contenuto-box chef">
+                                <div class="icon">
+                                    <img style="width: 93px;" src="/images/loghi/ingredients.png">
+                                </div>
+                                <h4>Inserisci Ingrediente</h4>
+                                <p>(Inserisci un nuovo <strong>Ingrediente</strong> al sistema)</p>
+                                <a class="btn btn-purple" th:href="@{/admin/recipe}">Inserisci</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="admin-box">
+                            <div class="contenuto-box chef">
+                                <div class="icon">
+                                    <img style="width: 93px;" src="/images/loghi/category_icon.png">
+                                </div>
+                                <h4>Inserisci Categoria</h4>
+                                <p>(Inserisci una nuova <strong>Categoria</strong> al sistema)</p>
+                                <a class="btn btn-purple" th:href="@{/admin/category/aggiungiCategory}">Inserisci</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="purple-line my-4">
+            <h3 class="mb-4">Visualizzazione:</h3>
+
+            <div class="row">
+                <div class="col-md-12 mb-4">
+                    <div class="admin-box">
+                        <h2>Visualizza l'elenco degli Chef Inseriti nel Sistema:</h2>
+                        <a class="btn btn-purple" th:href="@{/admin/user}">Vai all'elenco »</a>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-4">
+                    <div class="admin-box">
+                        <h2>Visualizza l'elenco delle Ricette Inserite nel Sistema:</h2>
+                        <a class="btn btn-purple" th:href="@{/admin/recipe}">Vai all'elenco »</a>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-4">
+                    <div class="admin-box">
+                        <h2>Visualizza l'elenco degli Ingredienti Inseriti nel Sistema:</h2>
+                        <a class="btn btn-purple" th:href="@{/admin/ingredient}">Vai all'elenco »</a>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-4">
+                    <div class="admin-box">
+                        <h2>Visualizza l'elenco delle Categorie Inserite nel Sistema:</h2>
+                        <a class="btn btn-purple" th:href="@{/admin/category}">Vai all'elenco »</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container mt-4">
+    <div class="food-section mb-4"> </div>
+</div>
+
+</body>
+</html>

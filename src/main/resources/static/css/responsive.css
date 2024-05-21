@@ -1,0 +1,219 @@
+.material-symbols-outlined {
+    font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
+}
+
+/* bottom access/login */
+.btn-group-toggle .btn {
+    color: white;
+    border-color: white;
+    border-radius: 5px !important; /* Rounded corners */
+    outline: none; /* Rimuove l'evidenziazione blu */
+}
+.btn-outline-primary:hover {
+    background-color: #f9ebff;
+    color: #be48eb;
+}
+.btn-outline-primary:focus:active {
+    background-color: #be48eb !important; /* Cambia colore quando è cliccato */
+}
+
+/* Rimuove l'evidenziazione blu dopo il clic */
+.btn:focus {
+    outline: none !important;
+}
+
+/* ------------- */
+
+.input-group {
+    display: flex; /* Abilita il posizionamento flex per il gruppo di input */
+    width: 300px; /* Adjust width as needed */
+    background-color: #F8F9FA; /* Light gray background */
+    border-radius: 25px; /* Rounded corners */
+    border: 1px solid #ddd; /* Light border */
+}
+.input-group-text {
+    background-color: #F8F9FA; /* Light gray background */
+    border: none; /* Remove default border */
+    border-radius: 25px 0 0 25px; /* Rounded left corner */
+    padding: 10px 12px; /* Adjust padding as needed */
+}
+
+.navbar-toggler {
+    border-color: white;
+    color: white;
+}
+
+/* Personalizzazione della lista del menu */
+.nav-item.dropdown a .material-symbols-outlined {
+    color: white; /* Imposta il colore bianco */
+    font-size: 30px;
+}
+/* -------------------------------------- */
+
+/* Personalizzazione delle voci del menu */
+.nav-link {
+    color: white;
+}
+.nav-link:hover{
+    color: #be48eb;
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: white; /* Imposta il colore del testo a bianco */
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: #be48eb; /* Cambia il colore del testo al viola quando passi sopra con il mouse */
+}
+/* ------------------------------------- */
+
+/* Personalizzazione della barra di ricerca */
+.form-control  {
+    border: 1px solid #ced4da; /* Stile del bordo del campo di ricerca */
+    font-family: 'Cambria', sans-serif; /* Imposta il font Calibri */
+    border-radius: 0 25px 25px 0; /* Rounded right corner */
+    padding: 10px; /* Adjust padding as needed */
+}
+.input-group-append {
+    margin-left: auto; /* Posiziona l'icona sulla destra */
+}
+.navbar-search {
+    width: 300px; /* Regola la larghezza della barra di ricerca */
+}
+.navbar-search .form-control {
+    border: none;  /* Rimuovi il bordo predefinito del campo di ricerca */
+}
+.rounded-pill {
+    border-radius: 50px;  /* Angoli arrotondati del campo di ricerca */
+}
+/* ---------------------------------------- */
+
+/* Dropdown menu styles */
+.dropdown-menu {
+    background-color: #f9f9f9; /* Light gray background */
+    border: 1px solid #ddd; /* Light border */
+    padding: 10px;
+}
+.dropdown-item {
+    color: #333; /* Dark text color */
+    padding: 10px 15px; /* Adjust padding as needed */
+}
+.dropdown-item:hover {
+    background-color: #e9e9e9; /* Light gray background on hover */
+}
+/* --------------------- */
+
+/* Personalizzazione del navbar collapse */
+.menu-text-collapse {
+    color: #ab7ee4;;
+    display: block;
+    background-color: white;
+}
+.white-line-collapse{
+    border-top: 2px solid white;
+    display: block;
+}
+.navbar-collapse {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 1px;
+}
+
+
+/* ------------------------------------- */
+
+/* carousel */
+.carousel-image {
+    max-width: 70%; /* Adjust the width as needed */
+    height: auto;
+    margin: 0 auto; /* Centers the image horizontally */
+}
+.carousel-caption h5 {
+    font-size: 24px; /* Adjust font size as needed */
+}
+.carousel {
+    position: relative;
+}
+/* --- carousel control position */
+.carousel-control-prev , .carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: TranslateY(-50%);
+}
+.carousel-control-prev {
+    right: auto;
+    left: 10%;
+}
+.carousel-control-next {
+    left: auto;
+    right: 10%;
+}
+/* ------- */
+
+/* bottoni con immagini */
+/* Style for the section with a different background color */
+.food-section {
+    background-color: #f9ebff;
+    padding: 20px;
+    text-align: center; /* Center align content */
+}
+/* ------------------------------------------------------- */
+
+/* Style for the buttons */
+.food-button {
+    display: inline-block;
+    margin: 10px;
+    width: 200px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+/* --------------------- */
+
+/* Style for the button images */
+.food-button img {
+    display: block; /* Make image a block element */
+    margin: 0 auto; /* Center horizontally */
+    margin-bottom: 5px;
+}
+/* --------------------------- */
+
+/* Style for the button text */
+.food-button p {
+    margin: 0;
+    font-weight: bold;
+}
+.button-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* ------------------------- */
+
+/* Card */
+hr {
+    border: none;
+    border-top: 2px solid #ddd;
+}
+.purple-line {
+    border-top: 2px solid #8a2be2; /* colore lilla */
+}
+.card-author,
+.card-preparation-time {
+    font-size: 14px;
+    color: #777;
+}
+.card-author,
+.card-preparation-time {
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+.card-text.font-weight-bold {
+    font-weight: bold;
+}
+/* ---- */

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Modifica Categoria - Admin</title>
+    <link href="/css/responsive.css" rel="stylesheet" />
+    <style>
+        /* Stile per il contenitore del form */
+        .form-container {
+            background-color: #f9f9f9; /* Colore di sfondo chiaro */
+            border-radius: 15px; !important; /* Bordi arrotondati */
+            max-width: 500px; /* Larghezza massima */
+            margin: auto; /* Centrare il form */
+        }
+
+        /* Stile per i campi di input */
+        .form-control {
+            border-radius: 15px; !important;/* Bordi arrotondati */
+        }
+
+        /* Stile per il pulsante di invio */
+        .btn-purple {
+            background-color: #ab7ee4;
+            border-color: #ab7ee4;
+            color: white;
+        }
+
+        .btn-purple:hover {
+            background-color: #8e63c9;
+            border-color: #8e63c9;
+            color: white;
+        }
+
+        /* Margine inferiore per il pulsante di caricamento file */
+        .form-control-file {
+            margin-bottom: 20px; /* Distanziare il pulsante di caricamento file */
+        }
+
+        .admin-link {
+            text-decoration: none;
+            color: black;
+        }
+
+        .admin-link:hover,
+        .admin-link:focus {
+            text-decoration: none;
+            color: black;
+        }
+
+
+        .btn-lg .fas {
+            margin-right: .5rem;
+        }
+
+        /* Stile per le icone nei pulsanti della tabella */
+        .table .btn i {
+            margin: 0;
+        }
+
+        /* Rimozione margini e padding tra le colonne della tabella */
+        .table th, .table td {
+            vertical-align: middle;
+        }
+
+        /* Aggiustamenti per l'header della tabella */
+        .thead-dark th {
+            background-color: #343a40;
+            color: #fff;
+            border-color: #454d55;
+        }
+
+        .preview-img img {
+            max-width: 100%; /* Adattare l'immagine alla larghezza del contenitore */
+            height: auto; /* Mantenere le proporzioni dell'immagine */
+            border-radius: 10px; /* Bordi arrotondati per l'immagine */
+        }
+
+    </style>
+</head>
+<body>
+<header th:replace="fragments/layout.html :: navMenu"></header>
+
+<section class="generic_section layout_padding">
+
+    <div class="container mt-4">
+        <a href="#" th:href="@{/default}" class="admin-link">
+            <h2 class="text-center mb-4">Menu amministrazione</h2>
+        </a>
+        <hr class="purple-line my-4">
+
+        <div class="container">
+            <div class="d-flex justify-content-center mt-5">
+                <div class="form-container rounded p-4 shadow">
+                    <div class="heading_container mb-4 text-center">
+                        <h3>Modifica Categorie</h3>
+                    </div>
+                    <form th:action="@{/admin/category/modificaCategory/} + *{id}" method="post" th:object="${category}">
+                        <div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger" role="alert">
+                            <h4 align="center" th:each="err : ${#fields.globalErrors()}" th:text="'Errore: ' + ${err}">...</h4>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="title">Titolo</label>
+                            <input type="text" id="title" class="form-control rounded-pill" placeholder="Titolo" th:field="*{title}">
+                            <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="alert alert-danger mt-2" role="alert"></div>
+                        </div>
+                        <div class="btn_box text-center">
+                            <button type="submit" class="btn btn-purple">Modifica</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div> <!-- end container -->
+</section>
+
+<section class="generic_section layout_padding">
+    <div class="container mt-4">
+        <hr class="purple-line my-4">
+        <div class="container">
+            <div class="d-flex justify-content-center mt-5">
+                <div class="form-container rounded p-4 shadow">
+                    <div class="heading_container mb-4 text-center">
+                        <h3>Modifica Immagine della Categoria</h3>
+                    </div>
+                    <form th:action="@{/admin/category/changeImg/} + ${category.id}" method="post" enctype="multipart/form-data">
+                        <div class="form-group mb-4">
+                            <input type="file" class="form-control-file" name="file" required>
+                        </div>
+                        <div class="preview-img mb-4">
+                            <h5><em>Immagine attuale:</em></h5>
+                            <img th:if="${category.img == 'profili'}" src="/images/loghi/category_img.png" alt="Profile categoria">
+                            <img th:unless="${category.img == 'profili'}" th:src="'/images/category/profili/' + ${category.img}" alt="Profile categoria">
+                        </div>
+                        <div class="btn_box text-center">
+                            <button type="submit" class="btn btn-purple">Cambia Immagine</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="container mt-4">
+    <div class="food-section mb-4"> </div>
+</div>
+
+</body>
+</html>
