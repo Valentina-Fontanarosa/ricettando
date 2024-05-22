@@ -7,9 +7,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+
 @ControllerAdvice
 public class GlobalController {
-    @ModelAttribute("userDetails")
+   /*/ @ModelAttribute("userDetails")
     public UserDetails getUser() {
         UserDetails user = null;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -18,4 +19,5 @@ public class GlobalController {
         }
         return user;
     }
+    /*/
 }

@@ -64,6 +64,7 @@ public class UserController {
     public String adminUsers(Model model) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+
         List<User> users = this.userService.findAll();
         int i = 0;
         for(User user : users) {

@@ -41,8 +41,8 @@ public class AuthConfiguration {
                 .requestMatchers(HttpMethod.POST,"/register", "/login").permitAll()
                 .requestMatchers(HttpMethod.GET,"/admin/**").hasAnyAuthority(ADMIN_ROLE)
                 .requestMatchers(HttpMethod.POST,"/admin/**").hasAnyAuthority(ADMIN_ROLE)
-                .requestMatchers(HttpMethod.GET,"/genericUser/**").hasAnyAuthority(GENERIC_USER_ROLE)
-                .requestMatchers(HttpMethod.POST,"/genericUser/**").hasAnyAuthority(GENERIC_USER_ROLE)
+                .requestMatchers(HttpMethod.GET,"/genericUser/**").hasAnyAuthority(GENERIC_USER_ROLE,"OIDC_USER")
+                .requestMatchers(HttpMethod.POST,"/genericUser/**").hasAnyAuthority(GENERIC_USER_ROLE,"OIDC_USER")
                 // tutti gli utenti autenticati possono accere alle pagine rimanenti
                 .anyRequest().authenticated()
 
@@ -56,7 +56,7 @@ public class AuthConfiguration {
                 //google
                 .and().oauth2Login()
                 .loginPage("/login")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/default")
 
                 // LOGOUT: qui definiamo il logout
                 .and()

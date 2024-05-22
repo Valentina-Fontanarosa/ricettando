@@ -200,62 +200,63 @@
 
 
 
-<section class="generic_section layout_padding">
-    <div class="container mt-4">
-        <hr class="purple-line my-4">
-        <div class="container">
-            <div class="d-flex justify-content-center mt-5">
-                <div class="form-container rounded p-4 shadow">
-                    <div class="heading_container mb-4 text-center">
-                        <h3>Cambia credenziali</h3>
+<div sec:authorize="hasAnyAuthority('ADMIN', 'GENERIC_USER')">
+    <section class="generic_section layout_padding">
+        <div class="container mt-4">
+            <hr class="purple-line my-4">
+            <div class="container">
+                <div class="d-flex justify-content-center mt-5">
+                    <div class="form-container rounded p-4 shadow">
+                        <div class="heading_container mb-4 text-center">
+                            <h3>Cambia credenziali</h3>
+                        </div>
+                        <form th:action="@{/changeUserAndPass/} + ${credentials.id}" method="post" th:object="${credentials}" id="changeCredentialsForm">
+                            <div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger" role="alert">
+                                <h4 align="center" th:each="err : ${#fields.globalErrors()}" th:text="'Errore: ' + ${err}">...</h4>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="inputUsername">Username</label>
+                                <input type="text" class="form-control rounded-pill" id="inputUsername" aria-describedby="username" placeholder="Enter username" th:field="*{username}">
+                                <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-danger mt-2" role="alert"></div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="inputPassword">Nuova Password</label>
+                                <input type="password" class="form-control rounded-pill" id="inputPassword" placeholder="Password" th:field="*{password}" required>
+                                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger mt-2" role="alert"></div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="inputConfirmPassword">Conferma Nuova Password</label>
+                                <input type="password" class="form-control rounded-pill" id="inputConfirmPassword" placeholder="Confirm Password" name="confirmPass" required>
+                            </div>
+                            <div class="btn_box text-center">
+                                <button type="button" class="btn btn-purple" data-bs-toggle="modal" data-bs-target="#confirmChangeModal">Modifica</button>
+                            </div>
+                        </form>
                     </div>
-                    <form th:action="@{/changeUserAndPass/} + ${credentials.id}" method="post" th:object="${credentials}" id="changeCredentialsForm">
-                        <div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger" role="alert">
-                            <h4 align="center" th:each="err : ${#fields.globalErrors()}" th:text="'Errore: ' + ${err}">...</h4>
-                        </div>
-                        <div class="form-group mb-4">
-                            <label for="inputUsername">Username</label>
-                            <input type="text" class="form-control rounded-pill" id="inputUsername" aria-describedby="username" placeholder="Enter username" th:field="*{username}">
-                            <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-danger mt-2" role="alert"></div>
-                        </div>
-                        <div class="form-group mb-4">
-                            <label for="inputPassword">Nuova Password</label>
-                            <input type="password" class="form-control rounded-pill" id="inputPassword" placeholder="Password" th:field="*{password}" required>
-                            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger mt-2" role="alert"></div>
-                        </div>
-                        <div class="form-group mb-4">
-                            <label for="inputConfirmPassword">Conferma Nuova Password</label>
-                            <input type="password" class="form-control rounded-pill" id="inputConfirmPassword" placeholder="Confirm Password" name="confirmPass" required>
-                        </div>
-                        <div class="btn_box text-center">
-                            <button type="button" class="btn btn-purple" data-bs-toggle="modal" data-bs-target="#confirmChangeModal">Modifica</button>
-                        </div>
-                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="confirmChangeModal" tabindex="-1" role="dialog" aria-labelledby="confirmChangeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmChangeModalLabel">Conferma modifica</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Sei sicuro di voler modificare le credenziali?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                    <button type="button" class="btn btn-purple" onclick="document.getElementById('changeCredentialsForm').submit()">Conferma</button>
                 </div>
             </div>
         </div>
     </div>
-</section>
-
-<!-- Modal -->
-<div class="modal fade" id="confirmChangeModal" tabindex="-1" role="dialog" aria-labelledby="confirmChangeModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmChangeModalLabel">Conferma modifica</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Sei sicuro di voler modificare le credenziali?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
-                <button type="button" class="btn btn-purple" onclick="document.getElementById('changeCredentialsForm').submit()">Conferma</button>
-            </div>
-        </div>
-    </div>
 </div>
-
 <div class="container mt-4">
     <div class="food-section mb-4"> </div>
 </div>

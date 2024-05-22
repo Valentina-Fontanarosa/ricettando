@@ -11,15 +11,21 @@ import com.ricette.demo.validation.CredentialValidator;
 import com.ricette.demo.validation.UserValidator;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.time.LocalDate;
+import java.util.Collection;
+
 import static com.ricette.demo.model.User.DIR_FOLDER_IMG;
 
 @Controller
@@ -65,11 +71,38 @@ public class AuthenticationController {
 
     @RequestMapping(value="/default", method=RequestMethod.GET)
     public String defaultAfterLogin(Model model) {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Credentials credentials;
+        if (principal instanceof UserDetails) {
+            UserDetails userDetails = (UserDetails) principal;
+            credentials = credentialsService.getCredentials(userDetails.getUsername());
+        } else if (principal instanceof OAuth2User) {
+            OAuth2User oauth2User = (OAuth2User) principal;
+            String email = oauth2User.getAttribute("email");
+            credentials = credentialsService.getCredentials(email);
+
+            // DEBUG gestione credential
+            System.out.println("----------------");
+            System.out.println(oauth2User.getAttributes());
+            String name = oauth2User.getAttribute("name");
+            Collection<? extends GrantedAuthority> authorities = oauth2User.getAuthorities();
+            String roles = authorities.stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .reduce((s1, s2) -> s1 + ", " + s2)
+                    .orElse("");
+            System.out.println("----------------");
+            System.out.println("Hello, " + name + "! Your roles are: " + roles);
+            System.out.println("----------------");
+            // Fine DEBUG
+
+        } else {
+            throw new IllegalStateException("Principal type not supported: " + principal.getClass().getName());
+        }
+
         model.addAttribute("idUser", credentials.getId());
         model.addAttribute("categories", this.categoryRepository.findAll());
-        if(credentials.getRuolo().equals(Credentials.ADMIN_ROLE)) {
+
+        if (credentials.getRuolo().equals(Credentials.ADMIN_ROLE)) {
             return "admin/dashboardAdmin";
         } else if (credentials.getRuolo().equals(Credentials.GENERIC_USER_ROLE)) {
             return "genericUser/dashboardGenericUser";
@@ -77,12 +110,26 @@ public class AuthenticationController {
         return this.profileUser(model);
     }
 
+
     /* PROFILE */
     @GetMapping("/profile")
     public String profileUser(Model model) {
 
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+        //UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Credentials credentials;
+        if (principal instanceof UserDetails) {
+            UserDetails userDetails = (UserDetails) principal;
+            credentials = credentialsService.getCredentials(userDetails.getUsername());
+        } else if (principal instanceof OAuth2User) {
+            OAuth2User oauth2User = (OAuth2User) principal;
+            String email = oauth2User.getAttribute("email");
+            credentials = credentialsService.getCredentials(email);
+        } else {
+            throw new IllegalStateException("Principal type not supported: " + principal.getClass().getName());
+        }
 
         User user = userService.getUser(credentials.getUser().getId());
         model.addAttribute("user", user);
@@ -101,7 +148,7 @@ public class AuthenticationController {
 
         // validazione user e credenziali
         this.userValidator.validate(user, userBindingResult);
-        System.out.println("user error: " + userBindingResult.hasErrors());
+
         this.credentialsValidator.validate(credentials, credentialsBindingResult);
 
         if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
@@ -193,7 +240,6 @@ public class AuthenticationController {
         model.addAttribute("user", user);
         return "Authentication/profile";
     }
-
 
 }
 

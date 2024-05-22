@@ -74,7 +74,7 @@
 
           <div sec:authorize="isAuthenticated()">
             <div class="btn-group btn-group-toggle" role="group" aria-label="Basic outlined example">
-              <a sec:authorize="hasAnyAuthority('ADMIN', 'GENERIC_USER')" th:href="@{/profile}" class="btn btn-outline-primary me-2">
+              <a sec:authorize="hasAnyAuthority('ADMIN', 'GENERIC_USER', 'OIDC_USER')" th:href="@{/profile}" class="btn btn-outline-primary me-2">
                 Profile
               </a>
               <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#logoutModal">

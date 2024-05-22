@@ -14,6 +14,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -146,8 +147,21 @@ public class IngredientController {
     @GetMapping("/genericUser/ingredient/aggiungiIngredientGenericUser/{idRecipe}")
     public String addIngredientPageGenericUser(@PathVariable("idRecipe") Long idRecipe, Model model) {
 
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+        //UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Credentials credentials;
+        if (principal instanceof UserDetails) {
+            UserDetails userDetails = (UserDetails) principal;
+            credentials = credentialsService.getCredentials(userDetails.getUsername());
+        } else if (principal instanceof OAuth2User) {
+            OAuth2User oauth2User = (OAuth2User) principal;
+            String email = oauth2User.getAttribute("email");
+            credentials = credentialsService.getCredentials(email);
+        } else {
+            throw new IllegalStateException("Principal type not supported: " + principal.getClass().getName());
+        }
+
         User user = credentials.getUser();
 
         // Aggiunge una nuova ricetta vuota al modello
@@ -171,8 +185,22 @@ public class IngredientController {
                                           @PathVariable("idRecipe") Long idRecipe,
                                           Model model) {
         // Ottiene i dettagli dell'utente corrente autenticato
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+        //UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Credentials credentials;
+        if (principal instanceof UserDetails) {
+            UserDetails userDetails = (UserDetails) principal;
+            credentials = credentialsService.getCredentials(userDetails.getUsername());
+        } else if (principal instanceof OAuth2User) {
+            OAuth2User oauth2User = (OAuth2User) principal;
+            String email = oauth2User.getAttribute("email");
+            credentials = credentialsService.getCredentials(email);
+        } else {
+            throw new IllegalStateException("Principal type not supported: " + principal.getClass().getName());
+        }
+
         User user = credentials.getUser();
 
         // Recupera la ricetta tramite l'ID
@@ -212,13 +240,15 @@ public class IngredientController {
                                       Model model) {
 
         ingredient.setId(idIngredient);
-        this.ingredientValidator.validate(ingredient, bindingResult);
 
-        if (bindingResult.hasErrors()) {
+        this.ingredientValidator.validate(ingredient, bindingResult);
+        System.out.println("<<<<<<<<<<<< bindingResult.hasErrors()=" + bindingResult.hasErrors());
+        if (!bindingResult.hasErrors()) {
             this.ingredientService.update(ingredient, idIngredient);
             Ingredient i = this.ingredientService.findById(idIngredient);
             return genericUserIngredients(i.getRecipe().getId(), model);
         }
+
         model.addAttribute("categories", this.categoryService.findAll());
         return DIR_GENERIC_USER_PAGES_INGREDIENT + "genericUserModificaIngredient";
     }
