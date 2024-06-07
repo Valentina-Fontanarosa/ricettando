@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Error Page</title>
+    <style>
+        .errorPage {
+            background-color: #d1a6ff;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h1>Error!</h1>
+<div class="errorPage">
+    <p>
+        There seems to be a problem with the page you requested
+        (<span th:text="${path}"></span>).
+    </p>
+    <p th:if="${message}" th:text="'Message: ' + ${message}"></p>
+</div>
+</body>
+</html>
