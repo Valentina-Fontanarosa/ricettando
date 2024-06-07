@@ -80,18 +80,20 @@
 	<div id="recipe-carousel" class="carousel slide" data-ride="carousel">
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<div class="d-flex justify-content-center">
-					<div class="card mx-3" th:each="recipe : ${recipesAll}">
-						<a th:href="@{'/recipe/' + ${recipe.id}}">
-							<img th:if="${recipe.img == 'profili'}" src="/images/ricette/recipe.png"  class="card-img-top" alt="...">
-							<img th:unless="${recipe.img == 'profili'}" th:src="'/images/recipe/profili/' + ${recipe.img}" class="card-img-top" alt="...">
-						</a>
-						<div class="card-body">
-							<h5 class="card-title font-weight-bold mb-4" th:text="${recipe.title}">Titolo della ricetta</h5>
-							<p class="card-category mb-4" th:text="'Categoria: ' + ${recipe.category.title}">Categoria </p>
-							<p class="card-author mb-4" th:text="'Autore: ' + ${recipe.user.name + ' ' + recipe.user.surname}">Autore </p>
-							<hr>
-							<p class="card-preparation-time mb-0" th:text="'Tempo di preparazione: ' + ${recipe.time} + ' min'">Tempo di preparazione </p>
+				<div class="row">
+					<div class="col-md-4" th:each="recipe : ${recipesAll}">
+						<div class="card mb-4">
+							<a th:href="@{'/recipe/' + ${recipe.id}}">
+								<img th:if="${recipe.img == 'profili'}" src="/images/ricette/recipe.png"  class="card-img-top" alt="...">
+								<img th:unless="${recipe.img == 'profili'}" th:src="'/images/recipe/profili/' + ${recipe.img}" class="card-img-top" alt="...">
+							</a>
+							<div class="card-body">
+								<h5 class="card-title font-weight-bold mb-4" th:text="${recipe.title}">Titolo della ricetta</h5>
+								<p class="card-category mb-4" th:text="'Categoria: ' + ${recipe.category.title}">Categoria </p>
+								<p class="card-author mb-4" th:text="'Autore: ' + ${recipe.user.name + ' ' + recipe.user.surname}">Autore </p>
+								<hr>
+								<p class="card-preparation-time mb-0" th:text="'Tempo di preparazione: ' + ${recipe.time} + ' min'">Tempo di preparazione </p>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -100,8 +102,11 @@
 	</div>
 </div>
 
+
+
 <div class="container mt-4">
 	<div class="food-section mb-4"> </div>
 </div>
+
 </body>
 </html>

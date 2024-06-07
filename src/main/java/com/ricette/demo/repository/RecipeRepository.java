@@ -22,13 +22,5 @@ public interface RecipeRepository extends CrudRepository<Recipe, Long> {
     List<Recipe> findByTitleContainingWithUserNameIgnoreCase(@Param("query") String query);
 
 
-    @Query("SELECT r FROM Recipe r WHERE r.user.id = :userId")
-    List<Recipe> findRecipesByUserId(@Param("userId") Long userId);
-
-    // Metodo esistente
-    @Query("SELECT r.user.id FROM Recipe r WHERE r.id = :recipeId")
-    Long getIdUserOfRecipes(@Param("recipeId") Long recipeId);
-
-
     List<Recipe> findByUser(User user);
 }

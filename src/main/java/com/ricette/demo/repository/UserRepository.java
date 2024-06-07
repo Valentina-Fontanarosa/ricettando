@@ -19,7 +19,4 @@ public interface UserRepository extends CrudRepository<User, Long> {
     List<User> getUsersWithRecipeCount();
 
 
-    @Query("SELECT c.user FROM Credentials c WHERE c.ruolo = 'GENERIC_USER'")
-    List<User> findAllByCredentials_Ruolo();
-
 }

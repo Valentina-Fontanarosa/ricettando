@@ -33,6 +33,7 @@
             <p><strong>Descrizione:</strong> <span th:text="${recipe.description}"></span></p>
             <p><strong>Tempo di preparazione:</strong> <span th:text="${recipe.time}"></span> minuti</p>
             <p><strong>Livello:</strong> <span th:text="${recipe.level}"></span></p>
+            <p><strong>Autore:</strong> <span th:text="${recipe.user.name + ' ' + recipe.user.surname}"></span></p>
 
             <!-- Immagine della ricetta -->
             <img th:if="${recipe.img == 'profili'}" src="/images/ricette/recipe.png" class="img-fluid rounded mx-auto d-block mt-4" alt="Immagine della ricetta">

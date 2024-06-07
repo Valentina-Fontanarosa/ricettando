@@ -9,6 +9,7 @@ import com.ricette.demo.service.UserService;
 import com.ricette.demo.utility.FileStore;
 import com.ricette.demo.validation.CredentialValidator;
 import com.ricette.demo.validation.UserValidator;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -99,15 +100,20 @@ public class AuthenticationController {
             throw new IllegalStateException("Principal type not supported: " + principal.getClass().getName());
         }
 
-        model.addAttribute("idUser", credentials.getId());
-        model.addAttribute("categories", this.categoryRepository.findAll());
+        if (credentials != null) {
+            model.addAttribute("idUser", credentials.getId());
+            model.addAttribute("categories", this.categoryRepository.findAll());
 
-        if (credentials.getRuolo().equals(Credentials.ADMIN_ROLE)) {
-            return "admin/dashboardAdmin";
-        } else if (credentials.getRuolo().equals(Credentials.GENERIC_USER_ROLE)) {
-            return "genericUser/dashboardGenericUser";
+            if (credentials.getRuolo().equals(Credentials.ADMIN_ROLE)) {
+                return "admin/dashboardAdmin";
+            } else if (credentials.getRuolo().equals(Credentials.GENERIC_USER_ROLE)) {
+                return "genericUser/dashboardGenericUser";
+            }
+            return this.profileUser(model);
+        } else {
+            model.addAttribute("message", "Spiacenti, non sei registrato");
+            return "error";
         }
-        return this.profileUser(model);
     }
 
 

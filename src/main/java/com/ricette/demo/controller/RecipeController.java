@@ -85,7 +85,7 @@ public class RecipeController {
         List<Recipe> recipes = recipeService.findAll();
         model.addAttribute("recipes", recipes);
         model.addAttribute("categories", this.categoryService.findAll());
-        return Recipe.DIR_ADMIN_PAGES_RECIPE + "adminRecipe";
+        return DIR_ADMIN_PAGES_RECIPE + "adminRecipe";
     }
     // -- INSERIMENTO -- //
     @GetMapping("/admin/recipe/aggiungiRecipe/{idUser}")

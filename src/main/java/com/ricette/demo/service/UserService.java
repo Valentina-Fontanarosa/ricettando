@@ -27,6 +27,7 @@ public class UserService {
     public List<User> getUsersWithRecipeCount() {
         return userRepository.getUsersWithRecipeCount();
     }
+
     public boolean alreadyExists(User c) {
         return this.userRepository.existsByNameAndSurnameAndDateOfBirth(c.getName(),
                 c.getSurname(),
