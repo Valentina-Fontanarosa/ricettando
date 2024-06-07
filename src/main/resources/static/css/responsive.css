@@ -217,3 +217,410 @@ hr {
     font-weight: bold;
 }
 /* ---- */
+
+/* category */
+/* Stile personalizzato per il badge */
+.recipe-name {
+    color: black; /* Colore del testo nero */
+    text-decoration: none; /* Rimuove la sottolineatura */
+    transition: color 0.3s; /* Transizione per il cambio di colore al passaggio del mouse */
+}
+
+.recipe-name:hover {
+    color: #be48eb; /* Colore viola al passaggio del mouse */
+}
+
+.badge.bg-purple {
+    background-color: #ab7ee4; /* Colore di sfondo viola */
+    color: white; /* Colore del testo bianco */
+}
+
+.small-box {
+    max-width: 400px; /* Larghezza massima desiderata */
+}
+
+/* recipe */
+
+/* Stile personalizzato per giustificare il testo */
+.procedure-text {
+    text-align: justify;
+}
+
+.table {
+    width: 50%;
+    border-radius: 20px;
+}
+
+/* recipes */
+/* Stile personalizzato per il badge */
+.recipe-name {
+    color: black; /* Colore del testo nero */
+    text-decoration: none; /* Rimuove la sottolineatura */
+    transition: color 0.3s; /* Transizione per il cambio di colore al passaggio del mouse */
+}
+
+.recipe-name:hover {
+    color: #be48eb; /* Colore viola al passaggio del mouse */
+}
+
+.recipe-link {
+    text-decoration: none; /* Rimuove la sottolineatura */
+}
+
+.badge.bg-purple {
+    background-color: #ab7ee4; /* Colore di sfondo viola */
+    color: white; /* Colore del testo bianco */
+}
+
+.small-box {
+    max-width: 400px; /* Larghezza massima desiderata */
+}
+
+.btn-purple {
+    background-color: #ab7ee4;
+    border-color: #ab7ee4;
+}
+
+.btn-purple:hover {
+    background-color: white;
+    border-color: white;
+}
+
+.btn-purple,
+.btn-purple:hover,
+.btn-purple:active {
+    background-color: #ab7ee4 !important;
+    border-color: #ab7ee4 !important;
+}
+
+/* serach recipe */
+/* Stile personalizzato per il badge */
+.recipe-name {
+    color: black; /* Colore del testo nero */
+    text-decoration: none; /* Rimuove la sottolineatura */
+    transition: color 0.3s; /* Transizione per il cambio di colore al passaggio del mouse */
+}
+
+.recipe-name:hover {
+    color: #be48eb; /* Colore viola al passaggio del mouse */
+}
+
+.recipe-link {
+    text-decoration: none; /* Rimuove la sottolineatura */
+}
+
+.badge.bg-purple {
+    background-color: #ab7ee4; /* Colore di sfondo viola */
+    color: white; /* Colore del testo bianco */
+}
+
+.small-box {
+    max-width: 400px; /* Larghezza massima desiderata */
+}
+
+/* user */
+.chef-profile {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+.chef-profile img {
+    width: 150px; /* Larghezza  */
+    height: 150px; /* Altezza  */
+    object-fit: cover; /* Per mantenere le proporzioni */
+    border-radius: 10px; /* Bordi arrotondati */
+    margin-bottom: 20px;
+}
+.recipe-list {
+    margin-top: 30px;
+}
+.recipe-list ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+.recipe-list ul li {
+    margin-bottom: 10px;
+}
+.small-box {
+    max-width: 400px; /* Larghezza massima desiderata */
+}
+.recipe-name {
+    color: black; /* Colore nero per i nomi delle ricette */
+    transition: color 0.3s; /* Transizione per il cambio di colore */
+    text-decoration: none;
+}
+
+.recipe-name:hover {
+    color: #be48eb; /* Colore viola quando ci passi sopra con il mouse */
+    text-decoration: none; /* Rimuove la sottolineatura */
+}
+
+/* users */
+.custom-badge {
+    background-color: #ab7ee4 !important;
+    color: white !important;
+}
+
+.badge-text {
+    font-size: 14px;
+}
+
+.badge-value {
+    font-size: 16px;
+}
+.text-decoration-none:hover {
+    text-decoration: underline;
+}
+.chef-name {
+    color: black; /* Colore nero per i nomi e i cognomi */
+    transition: color 0.3s; /* Transizione per il cambio di colore */
+}
+
+.chef-name:hover {
+    color: #be48eb; /* Colore viola quando ci passi sopra con il mouse */
+}
+
+/* dashboard generic User */
+.admin-box {
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+}
+
+.contenuto-box {
+    text-align: center;
+}
+
+.contenuto-box h4 {
+    margin-top: 10px;
+    font-size: 1.5em;
+}
+
+.contenuto-box p {
+    margin-top: 5px;
+    font-size: 1em;
+    color: #555;
+}
+
+.admin-box h2 {
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.admin-box a.btn {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Stile del bottone con il colore viola */
+.btn-purple {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #ab7ee4;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+/* Stile del bottone al passaggio del mouse */
+.btn-purple:hover {
+    background-color: rgba(255, 255, 255, 0.8); /* Bianco opaco */
+    border-color: #8e63c9;
+    color: #be48eb; /* Colore viola chiaro */
+}
+
+/* Stile del bottone attivo e con il focus */
+.btn-purple:active,
+.btn-purple:focus {
+    background-color: rgba(255, 255, 255, 0.8); /* Bianco opaco */
+    border-color: #8e63c9;
+    color: #be48eb; /* Colore viola chiaro */
+}
+
+.admin-link {
+    text-decoration: none;
+    color: black;
+}
+
+.admin-link:hover,
+.admin-link:focus {
+    text-decoration: none;
+    color: black;
+}
+
+/* generic user recipe*/
+/* Stile per il pulsante "ADD chef" */
+.btn-lg-add {
+    font-size: 1.25rem;
+    padding: .5rem 1rem;
+    display: flex;
+    align-items: center;
+    background-color: #d1a6ff;
+    border-color: #d1a6ff;
+    color: #000;
+}
+
+.btn-lg-add .fas {
+    margin-right: .5rem;
+}
+
+/* Stile per le icone nei pulsanti della tabella */
+.table .btn i {
+    margin: 0;
+}
+
+/* Rimozione margini e padding tra le colonne della tabella */
+.table th, .table td {
+    vertical-align: middle;
+}
+
+/* Aggiustamenti per l'header della tabella */
+.thead-dark th {
+    background-color: #343a40;
+    color: #fff;
+    border-color: #454d55;
+}
+
+.admin-link {
+    text-decoration: none;
+    color: black;
+}
+
+.admin-link:hover,
+.admin-link:focus {
+    text-decoration: none;
+    color: black;
+}
+
+/* Stile per il contenitore con bordo bianco e arrotondamenti */
+.content-box {
+    border: 1px solid #fff;
+    border-radius: 15px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    margin-top: 20px;
+}
+
+
+/* generic user modifica*/
+/* Stile per il contenitore del form */
+.form-container {
+    background-color: #f9f9f9; /* Colore di sfondo chiaro */
+    border-radius: 15px; /* Bordi arrotondati */
+    max-width: 500px; /* Larghezza massima aumentata */
+    margin: auto; /* Centrare il form */
+    padding: 2rem; /* Aggiunta di padding */
+}
+
+/* Stile per i campi di input */
+.form-control {
+    border-radius: 15px; /* Bordi arrotondati */
+}
+
+/* Stile per il pulsante di invio */
+.btn-purple {
+    background-color: #ab7ee4;
+    border-color: #ab7ee4;
+    color: white;
+}
+
+.btn-purple:hover {
+    background-color: #8e63c9;
+    border-color: #8e63c9;
+    color: white;
+}
+
+/* Margine inferiore per il pulsante di caricamento file */
+.form-control-file {
+    margin-bottom: 20px; /* Distanziare il pulsante di caricamento file */
+}
+
+.admin-link {
+    text-decoration: none;
+    color: black;
+}
+
+.admin-link:hover,
+.admin-link:focus {
+    text-decoration: none;
+    color: black;
+}
+
+/* Stile per il pulsante "ADD chef" */
+.btn-lg-add {
+    font-size: 1.25rem;
+    padding: .5rem 1rem;
+    display: flex;
+    align-items: center;
+    background-color: #d1a6ff;
+    border-color: #d1a6ff;
+    color: #000;
+}
+
+.btn-lg-add .fas {
+    margin-right: .5rem;
+}
+
+/* Stile per le icone nei pulsanti della tabella */
+.table .btn i {
+    margin: 0;
+}
+
+/* Rimozione margini e padding tra le colonne della tabella */
+.table th, .table td {
+    vertical-align: middle;
+}
+.table {
+    width: 100%;
+    margin: auto;
+}
+
+/* Aggiustamenti per l'header della tabella */
+.thead-dark th {
+    background-color: #343a40;
+    color: #fff;
+    border-color: #454d55;
+}
+
+.preview-img {
+    border: 1px solid #ddd; /* Bordo sottile */
+    padding: 10px; /* Spazio interno */
+    border-radius: 10px; /* Bordi arrotondati */
+    text-align: center; /* Centrare il contenuto */
+    max-width: 100%; /* Adattare la larghezza del contenitore */
+}
+
+.preview-img img {
+    max-width: 100%; /* Adattare l'immagine alla larghezza del contenitore */
+    height: auto; /* Mantenere le proporzioni dell'immagine */
+    border-radius: 10px; /* Bordi arrotondati per l'immagine */
+}
+
+/* register*/
+.required-field {
+    font-size: 0.8rem;
+    color: #666;
+    margin-left: 5px;
+}
+
+/* Stile per il pulsante "ADD chef" */
+.btn-lg {
+    font-size: 1.25rem;
+    padding: .5rem 1rem;
+    display: flex;
+    align-items: center;
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #000;
+}
