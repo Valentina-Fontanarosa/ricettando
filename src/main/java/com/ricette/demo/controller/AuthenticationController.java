@@ -121,9 +121,6 @@ public class AuthenticationController {
     @GetMapping("/profile")
     public String profileUser(Model model) {
 
-        //UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        //Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
-
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Credentials credentials;
         if (principal instanceof UserDetails) {

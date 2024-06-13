@@ -23,4 +23,8 @@ public interface RecipeRepository extends CrudRepository<Recipe, Long> {
 
 
     List<Recipe> findByUser(User user);
+
+    List<Recipe> findByTitleStartingWith(String prefix);
+
+    List<Recipe> findByIngredientsNameContainingIgnoreCase(String ingredientName);
 }

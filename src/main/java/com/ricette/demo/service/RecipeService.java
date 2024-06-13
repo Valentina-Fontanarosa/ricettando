@@ -90,4 +90,12 @@ public class RecipeService {
 
     public List<Recipe> findByUser(User user) { return this.recipeRepository.findByUser(user);
     }
+
+    public List<Recipe> findByTitleStartingWith(String prefix) {
+        return recipeRepository.findByTitleStartingWith(prefix);
+    }
+
+    public List<Recipe> findByIngredientName(String ingredientName) {
+        return recipeRepository.findByIngredientsNameContainingIgnoreCase(ingredientName);
+    }
 }

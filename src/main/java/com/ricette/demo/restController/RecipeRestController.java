@@ -26,4 +26,16 @@ public class RecipeRestController {
         return this.recipeService.findAll();
     }
 
+    /* tutte le ricette che iniziano con 'pa' */
+    @GetMapping(value = "/rest/recipe/pa")
+    public List<Recipe> getRecipesStartingWithPa() {
+        return this.recipeService.findByTitleStartingWith("Pa");
+    }
+
+    /* tutte ricette che hanno come ingrediente olio */
+    @GetMapping(value = "/rest/recipe/ingredient/olio")
+    public List<Recipe> getRecipesWithOlio() {
+        return this.recipeService.findByIngredientName("olio");
+    }
+
 }
